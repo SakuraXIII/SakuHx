@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./nes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./post.css" />
+  </head>
+  <body>
+    <button type="button" class="point" onclick="showAside()"></button>
+    <div class="aside animate nes-container is-centered" id="aside">
+      <div class="close" onclick="closeAside()"></div>
+      <div class="user">
+        <img
+          class="nes-avatar is-rounded is-large"
+          alt="avator"
+          id="userAvator"
+          src="../kiana.png"
+          style="image-rendering: pixelated;"
+        />
+        <p class="mt" id="userName">Sakura</p>
+        <a onclick="copySite()"
+          ><span class="nes-text is-disabled" id="userSite">hhttlkdfjlk</span></a
+        >
+      </div>
+      <hr />
+      <ul>
+        <li>
+          <button type="button" data-select="1" class="nes-btn is-primary mybtn_wid mt">
+            我的站点
+          </button>
+        </li>
+        <li>
+          <button type="button" data-select="2" class="nes-btn is-primary mybtn_wid mt">
+            文章列表
+          </button>
+        </li>
+        <li>
+          <button type="button" data-select="3" class="nes-btn is-primary mybtn_wid mt">
+            新的灵感
+          </button>
+        </li>
+        <li>
+          <button type="button" data-select="4" class="nes-btn is-primary mybtn_wid mt">
+            设置
+          </button>
+        </li>
+      </ul>
+      <div class="submit position">
+        <button type="button" onclick="syncSite()" class="nes-btn is-success mybtn_wid">
+          同步站点
+        </button>
+        <button type="button" onclick="openBrowser()" class="nes-btn is-warning mybtn_wid">
+          浏览器打开
+        </button>
+      </div>
+    </div>
+    <webview id="webview" src="https://tonyteachers.gitee.io/" class="none" data-view="1"></webview>
+
+    <div class="right">
+      <div class="post none" data-view="2">hello</div>
+    </div>
+    <script src="./index.js"></script>
+    <!-- <script src="./renderer.js"></script> -->
+  </body>
+</html>
