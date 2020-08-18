@@ -1,5 +1,14 @@
-.head {
-	height: 60px;
-	background-color: #fff;
-	box-shadow: 0 0 20px 0 #fff;
+.post-list {
+  padding: 10px;
+}
+.post_item {
+  margin-top: 15px;
+}
+.post_item span {
+  font-weight: bold;
+}
+
+.post_item i {
+  color: #5981c6;
+  float: right;
 }

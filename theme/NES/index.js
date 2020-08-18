@@ -28,18 +28,28 @@ function loadView() {
     InsertPostList();
   }
 }
-
 /**
  * 插入文章列表元素节点
  */
 function InsertPostList() {
   let ul = document.querySelector(".post ul");
   if (postList.length !== 0) {
+    ul.insertAdjacentHTML(
+      "beforeend",
+      `
+    <li>共计<span class="nes-text is-primary">${postList.length}</span>篇文章</li>
+    `
+    );
     postList.map((value, index, arr) => {
       ul.insertAdjacentHTML(
         "beforeend",
         `
-    <li>${value.split(".md")[0]}</li>
+      <li class='post_item'>
+        <div class="nes-container is-rounded">
+          <span class='nes-pointer' onclick='editPost(${index})'>${value.split(".md")[0]}</span>
+          <i class='nes-pointer' style='font-style:normal;' onclick='delPost(${index})'>删除</i>
+        </div>
+      </li>
     `
       );
     });
@@ -54,6 +64,19 @@ function InsertPostList() {
     );
   }
 }
+function editPost(index) {
+  window.open(global.postPath + "\\" + postList[index])
+}
+
+function delPost(index) {
+  console.log(index);
+  let path = global.postPath + "\\" + postList[index];
+  console.log(path);
+  // fs.unlink(path, err => {
+  //   if (err) throw err;
+  //   console.log("删除成功");
+  // });
+}
 
 /**
  * 绑定选项卡点击切换视图事件
@@ -66,19 +89,6 @@ document.getElementsByTagName("ul")[0].addEventListener("click", e => {
   document.querySelector(`[data-view="${selectId}"]`).classList.remove("none");
   active = selectId;
 });
-/**
- * 同步站点
- */
-function syncSite() {
-  // exec('npm run start','global.rootPath',(error,stdout,stderr)=>{
-  // })
-}
-/**
- * 在外部浏览器打开博客
- */
-function openBrowser() {
-  shell.openExternal(remote.getGlobal("mySiteInfo").blog);
-}
 /**
  * 点击头像下博客地址自动复制
  */
@@ -108,6 +118,19 @@ function showPopup(text) {
 }
 
 init();
+/**
+ * 同步站点
+ */
+function syncSite() {
+  // exec('npm run start','global.rootPath',(error,stdout,stderr)=>{
+  // })
+}
+/**
+ * 在外部浏览器打开博客
+ */
+function openBrowser() {
+  shell.openExternal(remote.getGlobal("mySiteInfo").blog);
+}
 
 function closeAside() {
   aside.style.width = 0;

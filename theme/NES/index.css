@@ -108,6 +108,12 @@ ol {
   content: "";
 }
 
+.right {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 @keyframes fade {
   from {
     opacity: 0;
