@@ -1,5 +1,8 @@
 .post-list {
-  padding: 10px;
+  padding: 25px;
+}
+.post-list:empty {
+  display: none;
 }
 .post_item {
   margin-top: 15px;
@@ -11,4 +14,11 @@
 .post_item i {
   color: #5981c6;
   float: right;
+}
+
+.not_found_post {
+  line-height: 100vh;
+  margin: auto;
+  width: fit-content;
+  font-size: 20px;
 }

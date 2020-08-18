@@ -26,6 +26,7 @@ function loadView() {
   if (postList.length === 0) {
     postList = fs.readdirSync(global.postPath);
     InsertPostList();
+    addListener();
   }
 }
 /**
@@ -46,8 +47,8 @@ function InsertPostList() {
         `
       <li class='post_item'>
         <div class="nes-container is-rounded">
-          <span class='nes-pointer' onclick='editPost(${index})'>${value.split(".md")[0]}</span>
-          <i class='nes-pointer' style='font-style:normal;' onclick='delPost(${index})'>删除</i>
+          <span class='nes-pointer' id='postname'>${value.split(".")[0]}</span>
+          <i class='nes-pointer' id='delpost' style='font-style:normal;'>删除</i>
         </div>
       </li>
     `
@@ -64,17 +65,45 @@ function InsertPostList() {
     );
   }
 }
-function editPost(index) {
-  window.open(global.postPath + "\\" + postList[index])
-}
 
-function delPost(index) {
-  console.log(index);
-  let path = global.postPath + "\\" + postList[index];
-  console.log(path);
+function addListener() {
+  document.querySelector(".post ul").addEventListener("click", e => {
+    switch (e.target.id) {
+      case "postname":
+        editPost(e.target.innerText + ".md");
+        break;
+      case "delpost":
+        // previousElementSibling 兄弟节点
+        delPost(e.target.previousElementSibling.innerText + ".md");
+        break;
+      default:
+        break;
+    }
+  });
+}
+/**
+ * 打开文章
+ * @param {string} postName 文章名
+ */
+function editPost(postName) {
+  if (global.openExtra) {
+    extraEditor(postName);
+  } else {
+    window.open(global.postPath + "\\" + postName);
+  }
+}
+/**
+ * 删除文章
+ * @param {string} postName 文章名
+ */
+function delPost(postName) {
+  let ul = document.querySelector(".post ul");
+  let index = postList.indexOf(postName);
+  postList.splice(index, 1);
+  ul.removeChild(ul.children[index + 1]);
   // fs.unlink(path, err => {
   //   if (err) throw err;
-  //   console.log("删除成功");
+      showPopup("删除成功!!");
   // });
 }
 
@@ -83,8 +112,6 @@ function delPost(index) {
  */
 document.getElementsByTagName("ul")[0].addEventListener("click", e => {
   let selectId = e.target.dataset.select;
-  console.log(selectId);
-  console.log(document.querySelector(`[data-view="${selectId}"]`));
   document.querySelector(`[data-view="${active}"]`).classList.add("none");
   document.querySelector(`[data-view="${selectId}"]`).classList.remove("none");
   active = selectId;
@@ -108,7 +135,7 @@ function showPopup(text) {
     popup.innerText = text;
     popup.setAttribute("class", "popup nes-balloon from-center");
     popup.style.opacity = 1;
-    let pop = document.body.appendChild(popup);
+    var pop = document.body.appendChild(popup);
     flag = false;
   }
   setTimeout(() => {
@@ -119,14 +146,23 @@ function showPopup(text) {
 
 init();
 /**
+ * 使用外部编辑器打开文章
+ * @param {string} postName 要打开的文章
+ */
+function extraEditor(postName) {
+  let cmd = global.extraEditor + " " + postName;
+  console.log(cmd);
+  exec(cmd, { cwd: global.postPath }, (error, stdout, stderr) => {});
+}
+/**
  * 同步站点
  */
 function syncSite() {
-  // exec('npm run start','global.rootPath',(error,stdout,stderr)=>{
+  // exec('npm run start',{cwd:global.rootPath},(error,stdout,stderr)=>{
   // })
 }
 /**
- * 在外部浏览器打开博客
+ * 外部浏览器打开博客
  */
 function openBrowser() {
   shell.openExternal(remote.getGlobal("mySiteInfo").blog);

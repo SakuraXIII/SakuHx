@@ -8,7 +8,7 @@ function createWindow() {
   Menu.setApplicationMenu(null);
   mainWindow = new BrowserWindow({
     width: 1200,
-    height: 755,
+    height: 780,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       webviewTag: true,
