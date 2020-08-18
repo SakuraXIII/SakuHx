@@ -23,15 +23,13 @@ function loadUser() {
 
 function loadView() {
   document.querySelector(`[data-view="${active}"]`).classList.remove("none");
-  fs.readdir(global.postPath, (err, files) => {
-    console.log(files);
-    postList = files;
-  });
+  console.log("1");
+  postList = fs.readdirSync(global.postPath);
   InsertPostList();
 }
 
 function InsertPostList() {
-  console.log(postList)
+  console.log(postList);
   let ul = document.querySelector(".post ul");
   if (postList.length !== 0) {
     postList.map((value, index, arr) => {
@@ -43,11 +41,14 @@ function InsertPostList() {
       );
     });
   } else {
-    ul.insertAdjacentHTML('afterend',`
+    ul.insertAdjacentHTML(
+      "afterend",
+      `
     <div class='not_found_post'>
     好像没有文章哎=￣ω￣=
     </div>
-    `)
+    `
+    );
   }
 }
 
