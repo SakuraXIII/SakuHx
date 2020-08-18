@@ -23,13 +23,16 @@ function loadUser() {
 
 function loadView() {
   document.querySelector(`[data-view="${active}"]`).classList.remove("none");
-  console.log("1");
-  postList = fs.readdirSync(global.postPath);
-  InsertPostList();
+  if (postList.length === 0) {
+    postList = fs.readdirSync(global.postPath);
+    InsertPostList();
+  }
 }
 
+/**
+ * 插入文章列表元素节点
+ */
 function InsertPostList() {
-  console.log(postList);
   let ul = document.querySelector(".post ul");
   if (postList.length !== 0) {
     postList.map((value, index, arr) => {
