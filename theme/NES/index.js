@@ -17,7 +17,7 @@ function init() {
 function loadUser() {
   document.getElementById("userAvator").src = global("mySiteInfo").avator
     ? global("mySiteInfo").avator
-    : "../kiana.png";
+    : "../../kiana.png";
   document.getElementById("userName").innerText = global("mySiteInfo").name ?? "Sakura";
   document.getElementById("userSite").innerText =
     global("mySiteInfo").blog ?? "https://tonyteachers.gitee.io/";

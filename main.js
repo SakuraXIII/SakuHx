@@ -20,7 +20,7 @@ function createWindow() {
     title: "SakuHx",
     backgroundColor: "#fff",
   });
-  mainWindow.loadFile(config.theme + "/index.html" ?? "index.html");
+  mainWindow.loadFile(__dirname + "/theme/" + config.theme + "/index.html");
   mainWindow.webContents.on("did-fail-load", error => {
     console.log(error);
     console.error("加载主题失败，恢复默认主题");
