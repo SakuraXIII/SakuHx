@@ -70,7 +70,7 @@ document.getElementsByTagName("ul")[0].addEventListener("click", e => {
  * 同步站点
  */
 function syncSite() {
-  // exec('npm run start','G:\\Blog',(error,stdout,stderr)=>{
+  // exec('npm run start','global.rootPath',(error,stdout,stderr)=>{
   // })
 }
 /**
@@ -92,17 +92,23 @@ function copySite() {
  * @param {string} text 需要显示的文本
  */
 function showPopup(text) {
-  let popup = document.createElement("div");
-  popup.innerText = text;
-  popup.setAttribute("class", "popup nes-balloon from-center");
-  popup.style.opacity = 1;
-  let pop = document.body.appendChild(popup);
+  let flag = true;
+  if (flag) {
+    let popup = document.createElement("div");
+    popup.innerText = text;
+    popup.setAttribute("class", "popup nes-balloon from-center");
+    popup.style.opacity = 1;
+    let pop = document.body.appendChild(popup);
+    flag = false;
+  }
   setTimeout(() => {
     document.body.removeChild(pop);
+    flag = true;
   }, 2000);
 }
 
 init();
+
 function closeAside() {
   aside.style.width = 0;
   aside.style.padding = 0;
