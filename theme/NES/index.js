@@ -35,12 +35,6 @@ function loadView() {
 function InsertPostList() {
   let ul = document.querySelector(".post ul");
   if (postList.length !== 0) {
-    ul.insertAdjacentHTML(
-      "beforeend",
-      `
-    <li>共计<span class="nes-text is-primary">${postList.length}</span>篇文章</li>
-    `
-    );
     postList.map((value, index, arr) => {
       ul.insertAdjacentHTML(
         "beforeend",
@@ -100,7 +94,7 @@ function delPost(postName) {
   let ul = document.querySelector(".post ul");
   let index = postList.indexOf(postName);
   postList.splice(index, 1);
-  ul.removeChild(ul.children[index + 1]);
+  ul.removeChild(ul.children[index]);
   // fs.unlink(path, err => {
   //   if (err) throw err;
       showPopup("删除成功!!");
