@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="./post.css" />
   </head>
   <body>
-    <button type="button" class="point" onclick="showAside()"></button>
+    <button type="button" class="point" id="showAside"></button>
     <div class="aside animate nes-container is-centered" id="aside">
-      <div class="close" onclick="closeAside()"></div>
+      <div class="close" id="closeAside"></div>
       <div class="user">
         <img
           class="nes-avatar is-rounded is-large"
@@ -20,7 +20,7 @@
           style="image-rendering: pixelated;"
         />
         <p class="mt" id="userName">Sakura</p>
-        <a onclick="copySite()"><span class="nes-text is-disabled" id="userSite">blogSite</span></a>
+        <a><span class="nes-text is-disabled" id="userSite">blogSite</span></a>
       </div>
       <hr />
       <ul>
@@ -46,10 +46,10 @@
         </li>
       </ul>
       <div class="submit position">
-        <button type="button" onclick="syncSite()" class="nes-btn is-success mybtn_wid">
+        <button type="button"id="syncSite" class="nes-btn is-success mybtn_wid">
           同步站点
         </button>
-        <button type="button" onclick="openBrowser()" class="nes-btn is-warning mybtn_wid">
+        <button type="button" id="openBrowser" class="nes-btn is-warning mybtn_wid">
           浏览器打开
         </button>
       </div>
@@ -63,7 +63,15 @@
         data-view="1"
       ></webview>
       <div class="post none" data-view="2">
-        <ul class="post-list"></ul>
+
+        <ul class="post_list"></ul>
+      </div>
+      <div class="none new_post">
+
+      </div>
+
+      <div class="none setting">
+        <ul class="setting_item"></ul>
       </div>
     </div>
     <script src="./index.js"></script>

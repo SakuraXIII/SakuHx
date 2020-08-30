@@ -1,7 +1,7 @@
-.post-list {
+.post_list {
   padding: 25px;
 }
-.post-list:empty {
+.post_list:empty {
   display: none;
 }
 .post_item {
