@@ -1,18 +1,30 @@
+const fs = require("fs");
 class Post {
   postList = [];
-
+  static instance = null;
   constructor() {
-    postList = this.postList.length == 0 ? fs.readdirSync(global.postPath) : this.postList;
+    this.postList = this.postList.length == 0 ? fs.readdirSync(App.global.postPath) : this.postList;
     this.InsertPostList();
     this.addListener();
   }
+  /**
+   * 单例模式写法
+   */
+  static getInstance() {
+    if (this.instance == null) {
+      this.instance = new Post();
+    }
+    return this.instance;
+  }
+
   /**
    * 插入文章列表元素节点
    */
   InsertPostList() {
     let ul = document.querySelector(".post ul");
-    if (postList.length !== 0) {
-      postList.map((value, index, arr) => {
+    console.log(ul);
+    if (this.postList.length !== 0) {
+      this.postList.map((value, index, arr) => {
         ul.insertAdjacentHTML(
           "beforeend",
           `
@@ -43,11 +55,11 @@ class Post {
     document.querySelector(".post ul").addEventListener("click", e => {
       switch (e.target.id) {
         case "postname":
-          editPost(e.target.innerText + ".md");
+          this.editPost(e.target.innerText + ".md");
           break;
         case "delpost":
           // previousElementSibling 兄弟节点
-          delPost(e.target.previousElementSibling.innerText + ".md");
+          this.delPost(e.target.previousElementSibling.innerText + ".md");
           break;
         default:
           break;
@@ -60,7 +72,7 @@ class Post {
    */
   editPost(postName) {
     if (global.openExtra) {
-      extraEditor(postName);
+      App.extraEditor(postName);
     } else {
       window.open(global.postPath + "\\" + postName);
     }
@@ -71,14 +83,13 @@ class Post {
    */
   delPost(postName) {
     let ul = document.querySelector(".post ul");
-    let index = postList.indexOf(postName);
-    postList.splice(index, 1);
+    let index = this.postList.indexOf(postName);
+    this.postList.splice(index, 1);
     ul.removeChild(ul.children[index]);
     // fs.unlink(path, err => {
     //   if (err) throw err;
-    showPopup("删除成功!!");
+    App.showPopup("删除成功!!");
     // });
   }
 }
-
 exports.Post = Post;

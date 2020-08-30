@@ -1,20 +1,18 @@
-const fs = require("fs");
 const { exec } = require("child_process");
 const { shell, remote } = require("electron");
 const { clipboard } = require("electron");
 const { Post } = require("./post");
-let global = remote.getGlobal("mySiteInfo");
-let aside = document.querySelector("#aside");
-
-let active = 2;
-
 class App {
+  active = 2;
+  aside = document.querySelector("#aside");
+  static global = remote.getGlobal("mySiteInfo");
   constructor() {
     this.init();
   }
 
   init() {
     this.loadUser();
+    this.showView();
     this.bindView();
     this.bindClick();
   }
@@ -32,21 +30,27 @@ class App {
   bindView() {
     document.getElementsByTagName("ul")[0].addEventListener("click", e => {
       let selectId = e.target.dataset.select;
-      document.querySelector(`[data-view="${active}"]`).classList.add("none");
-      document.querySelector(`[data-view="${selectId}"]`).classList.remove("none");
-      active = selectId;
-      switch (selectId) {
-        case 2:
-          new Post();
-          break;
-        case 3:
-          break;
-        case 4:
-          break;
-        default:
-          break;
-      }
+      document.querySelector(`[data-view="${this.active}"]`).classList.add("none");
+      this.active = Number(selectId);
+      this.showView();
     });
+  }
+  /**
+   * 显示激活的页面
+   */
+  showView() {
+    document.querySelector(`[data-view="${this.active}"]`).classList.remove("none");
+    switch (this.active) {
+      case 2:
+        Post.getInstance();
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+      default:
+        break;
+    }
   }
   /**
    * 绑定各种点击事件
@@ -58,26 +62,6 @@ class App {
     document.querySelector("#showAside").addEventListener("click", this.showAside);
     document.querySelector("#closeAside").addEventListener("click", this.closeAside);
   }
-  /**
-   * 气泡提示框
-   * @param {string} text 需要显示的文本
-   */
-  static showPopup(text) {
-    let flag = true;
-    if (flag) {
-      let popup = document.createElement("div");
-      popup.innerText = text;
-      popup.setAttribute("class", "popup nes-balloon from-center");
-      popup.style.opacity = 1;
-      var pop = document.body.appendChild(popup);
-      flag = false;
-    }
-    setTimeout(() => {
-      document.body.removeChild(pop);
-      flag = true;
-    }, 2000);
-  }
-
   /**
    * 点击头像下博客地址自动复制
    */
@@ -103,25 +87,43 @@ class App {
    * 收起侧边栏
    */
   closeAside() {
-    aside.style.width = 0;
-    aside.style.padding = 0;
-    aside.style.border = "none";
+    this.aside.style.width = 0;
+    this.aside.style.padding = 0;
+    this.aside.style.border = "none";
   }
   /**
    * 显示侧边栏
    */
   showAside() {
-    aside.style = null;
+    this.aside.style = null;
+  }
+  /**
+   * 气泡提示框
+   * @param {string} text 需要显示的文本
+   */
+  static showPopup(text) {
+    let flag = true;
+    if (flag) {
+      let popup = document.createElement("div");
+      popup.innerText = text;
+      popup.setAttribute("class", "popup nes-balloon from-center");
+      popup.style.opacity = 1;
+      var pop = document.body.appendChild(popup);
+      flag = false;
+    }
+    setTimeout(() => {
+      document.body.removeChild(pop);
+      flag = true;
+    }, 2000);
+  }
+  /**
+   * 使用外部编辑器打开文章
+   * @param {string} postName 要打开的文章
+   */
+  static extraEditor(postName) {
+    let cmd = global.extraEditor + " " + postName;
+    exec(cmd, { cwd: global.postPath }, (error, stdout, stderr) => {});
   }
 }
 
-/**
- * 使用外部编辑器打开文章
- * @param {string} postName 要打开的文章
- */
-function extraEditor(postName) {
-  let cmd = global.extraEditor + " " + postName;
-  exec(cmd, { cwd: global.postPath }, (error, stdout, stderr) => {});
-}
-
-new App()
+new App();
