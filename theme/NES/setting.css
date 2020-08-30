@@ -1,0 +1,55 @@
+.setting_item > li > div {
+  display: flex;
+  /* align-items: center; */
+  justify-content: flex-start;
+  height: 45px;
+}
+
+#set_isextra .switch {
+  position: relative;
+}
+
+#set_isextra input {
+  position: absolute;
+  width: 60px;
+  height: 28px;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 999;
+}
+
+.circle {
+  width: 60px;
+  height: 28px;
+	border: 1px solid #ff4949;
+  background-color: #ff4949;
+  border-radius: 50px;
+  position: absolute;
+  box-sizing: content-box;
+}
+.circle::before {
+  content: "OFF";
+  font-size: 12px;
+  color: #000;
+  text-align: center;
+  line-height: 25px;
+  position: absolute;
+  left: 0;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  transition: all 0.5s;
+}
+
+#set_isextra input:checked + .circle::before {
+  content: "ON";
+  left: 50%;
+}
+
+#set_isextra input:checked + .circle {
+	border-color: transparent;
+  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+}

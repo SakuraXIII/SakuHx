@@ -1,3 +1,9 @@
+/*
+ * @Author: Sakura Sun
+ * @Date: 2020-07-26 09:23:18
+ * @LastEditTime: 2020-08-30 18:34:50
+ * @Description: 入口主文件
+ */
 const { app, BrowserWindow, Tray, Menu } = require("electron");
 const path = require("path");
 const { config } = require("./appGlobal");
@@ -16,6 +22,7 @@ function createWindow() {
       webSecurity: false,
       allowRunningInsecureContent: false,
     },
+    // frame:false,
     icon: path.join(__dirname, "kiana.png"),
     title: "SakuHx",
     backgroundColor: "#fff",

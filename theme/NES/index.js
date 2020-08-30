@@ -2,9 +2,9 @@ const { exec } = require("child_process");
 const { shell, remote } = require("electron");
 const { clipboard } = require("electron");
 const { Post } = require("./post");
+const { Setting } = require("./setting");
 class App {
-  active = 2;
-  aside = document.querySelector("#aside");
+  active = 4;
   static global = remote.getGlobal("mySiteInfo");
   constructor() {
     this.init();
@@ -47,6 +47,7 @@ class App {
       case 3:
         break;
       case 4:
+        Setting.getInstance();
         break;
       default:
         break;
@@ -87,15 +88,17 @@ class App {
    * 收起侧边栏
    */
   closeAside() {
-    this.aside.style.width = 0;
-    this.aside.style.padding = 0;
-    this.aside.style.border = "none";
+    let aside = document.querySelector("#aside");
+    aside.style.width = 0;
+    aside.style.padding = 0;
+    aside.style.border = "none";
   }
   /**
    * 显示侧边栏
    */
   showAside() {
-    this.aside.style = null;
+    let aside = document.querySelector("#aside");
+    aside.style = null;
   }
   /**
    * 气泡提示框

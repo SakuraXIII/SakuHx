@@ -6,6 +6,7 @@
     <link href="./nes.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./post.css" />
+    <link rel="stylesheet" href="./setting.css" />
   </head>
   <body>
     <button type="button" class="point" id="showAside"></button>
@@ -17,7 +18,7 @@
           alt="avator"
           id="userAvator"
           src="../kiana.png"
-          style="image-rendering: pixelated;"
+          style="image-rendering: pixelated"
         />
         <p class="mt" id="userName">Sakura</p>
         <a><span class="nes-text is-disabled" id="userSite">blogSite</span></a>
@@ -46,15 +47,13 @@
         </li>
       </ul>
       <div class="submit position">
-        <button type="button"id="syncSite" class="nes-btn is-success mybtn_wid">
-          同步站点
-        </button>
+        <button type="button" id="syncSite" class="nes-btn is-success mybtn_wid">同步站点</button>
         <button type="button" id="openBrowser" class="nes-btn is-warning mybtn_wid">
           浏览器打开
         </button>
       </div>
     </div>
-    
+
     <div class="right">
       <webview
         id="webview"
@@ -63,18 +62,71 @@
         data-view="1"
       ></webview>
       <div class="post none" data-view="2">
-
         <ul class="post_list"></ul>
       </div>
-      <div class="none new_post" data-view="3">
-
-      </div>
+      <div class="none new_post" data-view="3"></div>
 
       <div class="none setting" data-view="4">
-        <ul class="setting_item"></ul>
+        <ul class="setting_item">
+          <li>
+            <div id="set_name">
+              <span>昵称</span>
+              <p></p>
+            </div>
+          </li>
+          <li>
+            <div id="set_avator">
+              <span>头像</span>
+              <p></p>
+              <i>Url路径,文件路径均可</i>
+            </div>
+          </li>
+          <li>
+            <div id="set_site">
+              <span>站点</span>
+              <p></p>
+            </div>
+          </li>
+          <li>
+            <div id="set_theme">
+              <span>主题</span>
+              <p></p>
+            </div>
+          </li>
+          <li>
+            <div id="set_root_path">
+              <span>博客路径</span>
+              <p></p>
+              <i>本地的博客文件夹根目录</i>
+            </div>
+          </li>
+          <li>
+            <div id="set_post_path">
+              <span>文章路径</span>
+              <p></p>
+              <i>文章存放的路径</i>
+            </div>
+          </li>
+          <li>
+            <div id="set_editor_path">
+              <span>外部编辑器路径</span>
+              <p></p>
+              <i>选择使用的外部编辑器路径</i>
+            </div>
+          </li>
+          <li>
+            <div id="set_isextra">
+              <span>是否外部编辑器打开文章</span>
+              <div class="switch">
+                <!-- 使用checkbox可以取消选择,radio无法取消选中状态 -->
+                <input type="checkbox" class="nes-btn" />
+                <span class="circle"></span>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
     <script src="./index.js"></script>
-    <!-- <script src="./renderer.js"></script> -->
   </body>
 </html>

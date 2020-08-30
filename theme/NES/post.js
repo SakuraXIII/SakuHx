@@ -22,7 +22,6 @@ class Post {
    */
   InsertPostList() {
     let ul = document.querySelector(".post ul");
-    console.log(ul);
     if (this.postList.length !== 0) {
       this.postList.map((value, index, arr) => {
         ul.insertAdjacentHTML(
