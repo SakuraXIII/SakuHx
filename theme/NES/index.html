@@ -71,46 +71,72 @@
           <li>
             <div id="set_name">
               <span>昵称</span>
-              <p></p>
+              <input class="nes-input" type="text" value="Sakura" spellcheck="false" />
             </div>
           </li>
           <li>
-            <div id="set_avator">
+            <div class="sak-input" id="set_avator">
               <span>头像</span>
-              <p></p>
-              <i>Url路径,文件路径均可</i>
+              <input
+                type="url"
+                class="nes-input"
+                value="G:/Working/electron/electron-quick-start/kiana.png"
+                spellcheck="false"
+              />
+              <i>支持文件路径</i>
             </div>
           </li>
           <li>
             <div id="set_site">
               <span>站点</span>
-              <p></p>
+              <input
+                class="nes-input"
+                type="text"
+                value="https://tonyteachers.gitee.io/"
+                spellcheck="false"
+              />
             </div>
           </li>
           <li>
             <div id="set_theme">
               <span>主题</span>
-              <p></p>
+              <div class="nes-select">
+                <select required id="default_select">
+                  <option value="" disabled selected hidden>Select...</option>
+                  <option value="0">To be</option>
+                  <option value="1">Not to be</option>
+                </select>
+              </div>
             </div>
           </li>
           <li>
             <div id="set_root_path">
               <span>博客路径</span>
-              <p></p>
+              <input class="nes-input" type="text" value="G:/Blog/Blog" spellcheck="false" />
               <i>本地的博客文件夹根目录</i>
             </div>
           </li>
           <li>
             <div id="set_post_path">
               <span>文章路径</span>
-              <p></p>
+              <input
+                class="nes-input"
+                type="text"
+                value="G:/Blog/Blog/source/_posts"
+                spellcheck="false"
+              />
               <i>文章存放的路径</i>
             </div>
           </li>
           <li>
             <div id="set_editor_path">
               <span>外部编辑器路径</span>
-              <p></p>
+              <input
+                class="nes-input"
+                type="text"
+                value="E:/Typora/Typora.exe"
+                spellcheck="false"
+              />
               <i>选择使用的外部编辑器路径</i>
             </div>
           </li>
@@ -119,9 +145,15 @@
               <span>是否外部编辑器打开文章</span>
               <div class="switch">
                 <!-- 使用checkbox可以取消选择,radio无法取消选中状态 -->
-                <input type="checkbox" class="nes-btn" />
+                <input type="checkbox" class="nes-btn" checked />
                 <span class="circle"></span>
               </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <button type="button" class="nes-btn is-primary" id="set_save">保存</button>
+              <i>下次启动时生效</i>
             </div>
           </li>
         </ul>

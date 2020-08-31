@@ -1,18 +1,66 @@
+.setting {
+  height: 100vh;
+  padding: 25px;
+}
+
+.setting_item {
+  margin-top: 5vh;
+}
+
 .setting_item > li > div {
   display: flex;
-  /* align-items: center; */
-  justify-content: flex-start;
-  height: 45px;
+  align-items: center;
+  margin: 10px 0;
 }
+
+.setting_item > li > div > span {
+  width: 25%;
+  margin-right: 10px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.setting_item > li > div > p {
+  margin: 0;
+}
+
+.setting_item > li > div > i {
+  font-style: normal;
+  color: #999;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.setting_item > li > div > input {
+  max-width: 50%;
+  height: 40px;
+}
+.setting_item > li > div .nes-select {
+  width: unset;
+  height: 40px;
+}
+.nes-select select {
+  height: 40px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.setting_item > li:last-child {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* ===================滑动开关样式begin===================== */
 
 #set_isextra .switch {
   position: relative;
+  height: 25px;
 }
 
 #set_isextra input {
   position: absolute;
-  width: 60px;
-  height: 28px;
+  width: 55px;
+  height: 25px;
   left: 0;
   top: 0;
   opacity: 0;
@@ -20,16 +68,16 @@
 }
 
 .circle {
-  width: 60px;
-  height: 28px;
-	border: 1px solid #ff4949;
+  width: 55px;
+  height: 25px;
+  border: 1px solid #ff4949;
   background-color: #ff4949;
   border-radius: 50px;
   position: absolute;
   box-sizing: content-box;
 }
 .circle::before {
-  content: "OFF";
+  content: "NO";
   font-size: 12px;
   color: #000;
   text-align: center;
@@ -37,19 +85,28 @@
   position: absolute;
   left: 0;
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 25px;
+  height: 25px;
   border: 1px solid #fff;
   background-color: #fff;
   transition: all 0.5s;
 }
 
 #set_isextra input:checked + .circle::before {
-  content: "ON";
-  left: 50%;
+  content: "YES";
+  left: 55%;
 }
 
 #set_isextra input:checked + .circle {
-	border-color: transparent;
-  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+  border-color: transparent;
+  background: linear-gradient(to right, #12c2e9, #c471ed);
+}
+
+/* =============滑动开关样式end================== */
+.sak-input input {
+  width: 100%;
+}
+
+#set_save {
+  padding: 6px 20px;
 }

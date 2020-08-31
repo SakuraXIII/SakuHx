@@ -21,8 +21,8 @@ class App {
    */
   loadUser() {
     document.getElementById("userAvator").src = global.avator ? global.avator : "../../kiana.png";
-    document.getElementById("userName").innerText = global.name ?? "Sakura";
-    document.getElementById("userSite").innerText = global.blog ?? "https://tonyteachers.gitee.io/";
+    document.getElementById("userName").innerText = global.name ? global.name : "Sakura";
+    document.getElementById("userSite").innerText = global.blog ? global.blog : "https://tonyteachers.gitee.io/";
   }
   /**
    * 绑定选项卡点击切换视图事件
