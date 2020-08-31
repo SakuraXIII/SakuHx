@@ -1,14 +1,16 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-07-26 09:23:18
- * @LastEditTime: 2020-08-30 18:34:50
+ * @LastEditTime: 2020-08-31 23:40:32
  * @Description: 入口主文件
  */
-const { app, BrowserWindow, Tray, Menu } = require("electron");
+const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const path = require("path");
 const { config } = require("./appGlobal");
+const { writeFile } = require("fs");
 global.mySiteInfo = config;
 let mainWindow = null;
+let needSave = false;
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true"; //关闭electron安全协议警告
 function createWindow() {
   Menu.setApplicationMenu(null);
@@ -29,7 +31,6 @@ function createWindow() {
   });
   mainWindow.loadFile(__dirname + "/theme/" + config.theme + "/index.html");
   mainWindow.webContents.on("did-fail-load", error => {
-    console.log(error);
     console.error("加载主题失败，恢复默认主题");
     mainWindow.loadFile("index.html");
   });
@@ -44,4 +45,19 @@ app.whenReady().then(() => {
 });
 app.on("window-all-closed", function () {
   if (process.platform !== "darwin") app.quit();
+});
+// 接收渲染进程发送的异步消息
+ipcMain.on("saveConfig", (event, args) => {
+  global.mySiteInfo = args;
+  needSave = true;
+  // 对消息进行回复
+  event.sender.send("reply", "ok");
+});
+// 关闭程序前保存更新的配置
+app.on("before-quit", () => {
+  if (needSave) {
+    writeFile("./conf.json", JSON.stringify(global.mySiteInfo), err => {
+      if (err) throw err;
+    });
+  }
 });
