@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./nes.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./nes.min.css" />
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./post.css" />
+    <link rel="stylesheet" href="./edit.css" />
     <link rel="stylesheet" href="./setting.css" />
   </head>
   <body>
@@ -17,7 +18,7 @@
           class="nes-avatar is-rounded is-large"
           alt="avator"
           id="userAvator"
-          src="../kiana.png"
+          src="../../kiana.png"
           style="image-rendering: pixelated"
         />
         <p class="mt" id="userName">Sakura</p>
@@ -55,17 +56,31 @@
     </div>
 
     <div class="right">
+      <!-- 站点 -->
       <webview
         id="webview"
         src="https://tonyteachers.gitee.io/"
         class="none"
         data-view="1"
       ></webview>
+      <!-- 文章列表 -->
       <div class="post none" data-view="2">
         <ul class="post_list"></ul>
       </div>
-      <div class="none new_post" data-view="3"></div>
-
+      <!-- 写文章 -->
+      <div class="none new_post" data-view="3">
+        <div class="top">
+          <h1>新的文章</h1>
+          <div>
+            <button type="button" class="nes-btn is-primary">暂存</button>
+            <button type="button" class="nes-btn is-success">保存</button>
+          </div>
+        </div>
+        <div contenteditable>
+          <p>dskfjkfdl</p>
+        </div>
+      </div>
+      <!-- 设置页 -->
       <div class="none setting" data-view="4">
         <ul class="setting_item">
           <li>

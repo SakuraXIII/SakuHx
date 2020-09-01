@@ -4,7 +4,7 @@ const { clipboard } = require("electron");
 const { Post } = require("./post");
 const { Setting } = require("./setting");
 class App {
-  active = 4;
+  active = 3;
   static global = remote.getGlobal("mySiteInfo");
   constructor() {
     this.init();
@@ -22,16 +22,18 @@ class App {
   loadUser() {
     document.getElementById("userAvator").src = global.avator ? global.avator : "../../kiana.png";
     document.getElementById("userName").innerText = global.name ? global.name : "Sakura";
-    document.getElementById("userSite").innerText = global.blog ? global.blog : "https://tonyteachers.gitee.io/";
+    document.getElementById("userSite").innerText = global.blog
+      ? global.blog
+      : "https://tonyteachers.gitee.io/";
   }
   /**
    * 绑定选项卡点击切换视图事件
    */
   bindView() {
     document.getElementsByTagName("ul")[0].addEventListener("click", e => {
-      let selectId = e.target.dataset.select;
-      document.querySelector(`[data-view="${this.active}"]`).classList.add("none");
-      this.active = Number(selectId);
+      let selectId = e.target.dataset.select; //当选项按钮点击过快时会出现无法获取data-select的情况 (undefined)
+      document.querySelector(`[data-view="${this.active}"]`)?.classList.add("none");
+      this.active = selectId ?? this.active; // 当出现undefined时不更新active
       this.showView();
     });
   }
@@ -41,12 +43,12 @@ class App {
   showView() {
     document.querySelector(`[data-view="${this.active}"]`).classList.remove("none");
     switch (this.active) {
-      case 2:
+      case "2":
         Post.getInstance();
         break;
-      case 3:
+      case "3":
         break;
-      case 4:
+      case "4":
         Setting.getInstance();
         break;
       default:

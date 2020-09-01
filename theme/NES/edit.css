@@ -1,0 +1,20 @@
+.new_post {
+	position: relative;
+}
+.new_post .top {
+  padding: 10px 5%;
+  box-shadow: 0 5px 20px 0 #eee;
+  position: absolute;
+  top: 0;
+  left: 0;
+	right: 0;
+	border: 1px solid #eee;
+}
+
+.top h1 {
+	float: left;
+}
+
+.top div {
+	float: right;
+}
