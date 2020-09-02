@@ -1,6 +1,7 @@
-.post_list {
+ul.post_list {
   padding: 25px;
 }
+/* 用来处理当列表为空时,padding仍然占了空间的效果 */
 .post_list:empty {
   display: none;
 }

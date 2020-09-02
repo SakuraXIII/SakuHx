@@ -25,7 +25,7 @@
         <a><span class="nes-text is-disabled" id="userSite">blogSite</span></a>
       </div>
       <hr />
-      <ul>
+      <ul class="saku">
         <li>
           <button type="button" data-select="1" class="nes-btn is-primary mybtn_wid mt">
             我的站点
@@ -65,7 +65,7 @@
       ></webview>
       <!-- 文章列表 -->
       <div class="post none" data-view="2">
-        <ul class="post_list"></ul>
+        <ul class="post_list saku"></ul>
       </div>
       <!-- 写文章 -->
       <div class="none new_post" data-view="3">
@@ -73,12 +73,15 @@
           <h1 contenteditable>新的文章</h1>
           <i>点击可修改标题</i>
           <div>
-            <button type="button" class="nes-btn is-primary">暂存</button>
-            <button type="button" class="nes-btn is-success">保存</button>
+            <button type="button" class="nes-btn is-primary" id="draft">暂存</button>
+            <button type="button" class="nes-btn is-success" id="save">保存</button>
           </div>
         </div>
-        <div contenteditable id="edit_area">
-          <p>dskfjkfdl</p>
+        <div id="edit_area" contenteditable="true" spellcheck="false">
+          <div></div>
+          <ul>
+            <li></li>
+          </ul>
         </div>
       </div>
       <!-- 设置页 -->

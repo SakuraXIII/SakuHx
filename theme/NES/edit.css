@@ -8,9 +8,10 @@
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 99;
   border: 1px solid #eee;
   background-color: #fff;
-  transition: width .2s ease-in-out;
+  transition: width 0.2s ease-in-out;
 }
 
 .top h1 {
@@ -30,17 +31,9 @@
 }
 
 #edit_area {
-  margin: 10vw 5vw 5vw;
+  margin: 10vw auto;
   background-color: #777;
   outline: none;
-}
-
-#edit_area *::selection {
-  color: white;
-  background-color: pink;
-}
-
-#edit_area {
   overflow-x: hidden;
   font-size: 13.6px;
   min-height: 0.8rem;
@@ -48,4 +41,28 @@
   padding: 1rem;
   border-radius: 3px;
   color: rgb(119, 119, 119);
+  width: 83%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#edit_area::after {
+  content: "";
+  height: 70vh;
+  display: block;
+}
+
+#edit_area *::selection {
+  color: white;
+  background-color: pink;
+}
+
+#edit_area div {
+  text-indent: 2em;
+}
+
+#edit_area div:empty::before {
+  content: "请写下你的想法...";
+  color: gray;
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-09-02 09:31:02
+ * @LastEditTime: 2020-09-02 19:35:12
  * @Description: 编辑页
  */
 
@@ -21,7 +21,12 @@ class Edit {
   }
 
   init() {
-    // this.createObserver()
+    this.createObserver();
+    this.bindClick();
+  }
+  bindClick() {
+    document.querySelector("#draft").addEventListener("click", this.saveDraft);
+    document.querySelector("#save").addEventListener("click", this.saveFile);
   }
   /**
    * 创建节点观察对象,监视编辑区的变化
@@ -30,20 +35,33 @@ class Edit {
     // 选择将观察突变的节点
     var targetNode = document.getElementById("edit_area");
     // 观察者的选项(要观察哪些突变)
-    var config = { attributes: true, childList: true, subtree: true };
+    var config = { childList: true, subtree: true, characterData: true };
     // 创建一个链接到回调函数的观察者实例
-    var observer = new MutationObserver(this.observeEvent);
+    /**
+     * 观察节点变化的异步回调
+     * @param {Array} mutationsList 节点变化记录列表
+     */
+    var observer = new MutationObserver(mutationsList => {
+      if (targetNode.children.length == 0) {
+        //阻止退格键将p标签也给删除,导致内部完全为空
+        let node = document.createElement("div");
+        targetNode.appendChild(node);
+      }
+    });
     // 开始观察已配置突变的目标节点
     observer.observe(targetNode, config);
-    console.log("ldkjf");
   }
   /**
-   * 观察节点变化的异步回调
-   * @param {Array} mutationsList 节点变化记录列表
-   * @param {MutationObserver} observe 实例对象
+   * 保存到草稿
    */
-  observeEvent(mutationsList, observe) {
-    console.log(mutationsList);
+  saveDraft() {
+    App.showPopup("暂存成功");
+  }
+  /**
+   * 保存到文件
+   */
+  saveFile() {
+    App.showPopup("保存成功");
   }
 }
 
