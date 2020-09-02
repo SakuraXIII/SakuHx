@@ -1,44 +1,35 @@
-# electron-quick-start
+# SakuHx
 
-**Clone and run for a quick way to see Electron in action.**
+本项目是基于**Electron**构建的静态博客编辑管理工具,主要是为了练习 Electron,其次是对于 Hexo 静态博客编写文章的流程感到些许繁琐,从而开发这个桌面程序为自己写 [博客](https://tonyteachers.gitee.io/) 提供便利.
 
-This is a minimal Electron application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.
+## 下载
 
-**Use this app along with the [Electron API Demos](https://electronjs.org/#get-started) app for API code examples to help you get started.**
-
-A basic Electron application needs just these files:
-
-- `package.json` - Points to the app's main file and lists its details and dependencies.
-- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
-- `index.html` - A web page to render. This is the app's **renderer process**.
-
-You can learn more about each of these components within the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start).
-
-## To Use
-
-To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+克隆并运行这个项目你需要 [Git](https://git-scm.com) 和 [Node.js](https://nodejs.org/en/download/) 同时也需要 [npm](http://npmjs.com) ,然后执行以下命令
 
 ```bash
 # Clone this repository
-git clone https://github.com/electron/electron-quick-start
+git clone https://github.com/SakuraXIII/SakuHx.git
 # Go into the repository
-cd electron-quick-start
+cd SakuHx
 # Install dependencies
 npm install
 # Run the app
 npm start
 ```
 
-Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
+## 使用
 
-## Resources for Learning Electron
+### 自定义主题
 
-- [electronjs.org/docs](https://electronjs.org/docs) - all of Electron's documentation
-- [electronjs.org/community#boilerplates](https://electronjs.org/community#boilerplates) - sample starter apps created by the community
-- [electron/electron-quick-start](https://github.com/electron/electron-quick-start) - a very basic starter Electron app
-- [electron/simple-samples](https://github.com/electron/simple-samples) - small applications with ideas for taking them further
-- [electron/electron-api-demos](https://github.com/electron/electron-api-demos) - an Electron app that teaches you how to use Electron
-- [hokein/electron-sample-apps](https://github.com/hokein/electron-sample-apps) - small demo apps for the various Electron APIs
+本项目理论上是支持自定义主题的,只需要将存放有编写好的 HTML CSS JS 文件的目录放在根目录下 **theme** 目录中即可,主题名取决于目录名.
+
+本项目目前未提供开放的 API,为了最大程度的自定义,你需要有 NodeJs 的基础,甚至是 Electron 的相关知识.
+
+Electron 是同时具备浏览器环境和 NodeJs 运行时环境,所以你几乎可以在你的 js 文件中任意使用两种环境的 API,只需遵循规范即可.
+
+### 配置
+
+程序的配置文件是根目录下的 **conf.json** 文件,当然在程序中有对应的设置页提供便捷的 UI 操作
 
 ## License
 

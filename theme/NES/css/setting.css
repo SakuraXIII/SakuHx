@@ -52,7 +52,7 @@
 
 /* ===================滑动开关样式begin===================== */
 
-#set_isextra .switch {
+.switch {
   position: relative;
   height: 25px;
 }
