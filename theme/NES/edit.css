@@ -1,20 +1,51 @@
 .new_post {
-	position: relative;
+  position: relative;
 }
 .new_post .top {
+  width: calc(100% - var(--asidewidth));
   padding: 10px 5%;
   box-shadow: 0 5px 20px 0 #eee;
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
-	right: 0;
-	border: 1px solid #eee;
+  right: 0;
+  border: 1px solid #eee;
+  background-color: #fff;
+  transition: width .2s ease-in-out;
 }
 
 .top h1 {
-	float: left;
+  float: left;
+  outline: none;
+}
+.top i {
+  font-style: normal;
+  color: #999;
+  font-size: 12px;
+  margin-left: 10px;
+  vertical-align: sub;
 }
 
 .top div {
-	float: right;
+  float: right;
+}
+
+#edit_area {
+  margin: 10vw 5vw 5vw;
+  background-color: #777;
+  outline: none;
+}
+
+#edit_area *::selection {
+  color: white;
+  background-color: pink;
+}
+
+#edit_area {
+  overflow-x: hidden;
+  font-size: 13.6px;
+  min-height: 0.8rem;
+  background: rgb(247, 247, 247);
+  padding: 1rem;
+  border-radius: 3px;
+  color: rgb(119, 119, 119);
 }

@@ -12,7 +12,7 @@
 }
 
 .post_item i {
-  color: #5981c6;
+  color: var(--primaryColor);
   float: right;
 }
 

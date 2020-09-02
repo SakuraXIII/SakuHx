@@ -1,3 +1,9 @@
+/*
+ * @Author: Sakura Sun
+ * @Date: 2020-08-29 23:20:46
+ * @LastEditTime: 2020-09-01 21:12:07
+ * @Description: 文章列表页
+ */
 const fs = require("fs");
 class Post {
   postList = [];
@@ -70,10 +76,10 @@ class Post {
    * @param {string} postName 文章名
    */
   editPost(postName) {
-    if (global.openExtra) {
+    if (App.global.openExtra) {
       App.extraEditor(postName);
     } else {
-      window.open(global.postPath + "\\" + postName);
+      window.open(App.global.postPath + "\\" + postName);
     }
   }
   /**

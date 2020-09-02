@@ -12,11 +12,16 @@ ol {
   display: none;
 }
 
+body {
+  --asidewidth: 25%;
+  --primaryColor: #5981c6
+}
+
 .aside {
-  width: 24%;
+  width: var(--asidewidth);
   height: 100vh;
   float: left;
-  background-color: #5981c6;
+  background-color: var(--primaryColor);
   overflow: hidden;
   color: #fff;
 }
@@ -62,7 +67,8 @@ ol {
   left: 0;
   top: 5%;
   border-radius: 0 30px 30px 0;
-  background-color: #5981c6;
+  z-index: 99999;
+  background-color: var(--primaryColor);
 }
 
 #webview {

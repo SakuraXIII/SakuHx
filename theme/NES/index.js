@@ -3,6 +3,7 @@ const { shell, remote } = require("electron");
 const { clipboard } = require("electron");
 const { Post } = require("./post");
 const { Setting } = require("./setting");
+const { Edit } = require("./edit");
 class App {
   active = 3;
   static global = remote.getGlobal("mySiteInfo");
@@ -20,10 +21,12 @@ class App {
    * 初始化用户信息
    */
   loadUser() {
-    document.getElementById("userAvator").src = global.avator ? global.avator : "../../kiana.png";
-    document.getElementById("userName").innerText = global.name ? global.name : "Sakura";
-    document.getElementById("userSite").innerText = global.blog
-      ? global.blog
+    document.getElementById("userAvator").src = App.global.avator
+      ? App.global.avator
+      : "../../kiana.png";
+    document.getElementById("userName").innerText = App.global.name ? App.global.name : "Sakura";
+    document.getElementById("userSite").innerText = App.global.blog
+      ? App.global.blog
       : "https://tonyteachers.gitee.io/";
   }
   /**
@@ -42,11 +45,12 @@ class App {
    */
   showView() {
     document.querySelector(`[data-view="${this.active}"]`).classList.remove("none");
-    switch (this.active) {
+    switch (this.active.toString()) {
       case "2":
         Post.getInstance();
         break;
       case "3":
+        Edit.getInstance()
         break;
       case "4":
         Setting.getInstance();
@@ -77,7 +81,7 @@ class App {
    * 同步站点
    */
   syncSite() {
-    // exec('npm run start',{cwd:global.rootPath},(error,stdout,stderr)=>{
+    // exec('npm run start',{cwd:App.global.rootPath},(error,stdout,stderr)=>{
     // })
   }
   /**
@@ -91,7 +95,7 @@ class App {
    */
   closeAside() {
     let aside = document.querySelector("#aside");
-    aside.style.width = 0;
+    document.body.style.setProperty('--asidewidth','0%')
     aside.style.padding = 0;
     aside.style.border = "none";
   }
@@ -100,6 +104,7 @@ class App {
    */
   showAside() {
     let aside = document.querySelector("#aside");
+    document.body.style.setProperty('--asidewidth','25%')
     aside.style = null;
   }
   /**
@@ -126,8 +131,10 @@ class App {
    * @param {string} postName 要打开的文章
    */
   static extraEditor(postName) {
-    let cmd = global.extraEditor + " " + postName;
-    exec(cmd, { cwd: global.postPath }, (error, stdout, stderr) => {});
+    let cmd = App.global.extraEditor + " " + postName;
+    exec(cmd, { cwd: App.global.postPath }, (error, stdout, stderr) => {
+      if (error | stderr) App.showPopup("外部编辑器打开失败--->" + error + stderr);
+    });
   }
 }
 
