@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-08-31 23:38:14
+ * @LastEditTime: 2020-09-02 20:00:35
  * @Description: 设置页
  */
 
@@ -89,10 +89,12 @@ class Setting {
       theme: select.options[index].text,
       avator: document.querySelector("#set_avator input").value,
       name: document.querySelector("#set_name input").value,
+      gitRepo: document.querySelector("#set_gitrepo input").value,
       blog: document.querySelector("#set_site input").value,
       rootPath: document.querySelector("#set_root_path input").value,
       postPath: document.querySelector("#set_post_path input").value,
       extraEditor: document.querySelector("#set_editor_path input").value,
+      openGit: document.querySelector("#set_isgit input").checked,
       openExtra: document.querySelector("#set_isextra input").checked,
     };
     return obj;

@@ -50,7 +50,7 @@ class App {
         Post.getInstance();
         break;
       case "3":
-        Edit.getInstance()
+        Edit.getInstance();
         break;
       case "4":
         Setting.getInstance();
@@ -81,21 +81,26 @@ class App {
    * 同步站点
    */
   syncSite() {
-    // exec('npm run start',{cwd:App.global.rootPath},(error,stdout,stderr)=>{
-    // })
+    exec("npm run start", { cwd: App.global.rootPath }, (error, stdout, stderr) => {
+      if (stderr) throw stderr;
+      App.showPopup("同步站点成功");
+      if (App.global.openGit) {
+        shell.openExternal(App.global.gitRepo);
+      }
+    });
   }
   /**
    * 外部浏览器打开博客
    */
   openBrowser() {
-    shell.openExternal(remote.getGlobal("mySiteInfo").blog);
+    shell.openExternal(App.global.blog);
   }
   /**
    * 收起侧边栏
    */
   closeAside() {
     let aside = document.querySelector("#aside");
-    document.body.style.setProperty('--asidewidth','0%')
+    document.body.style.setProperty("--asidewidth", "0%");
     aside.style.padding = 0;
     aside.style.border = "none";
   }
@@ -104,7 +109,7 @@ class App {
    */
   showAside() {
     let aside = document.querySelector("#aside");
-    document.body.style.setProperty('--asidewidth','25%')
+    document.body.style.setProperty("--asidewidth", "25%");
     aside.style = null;
   }
   /**
