@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-09-05 14:51:05
+ * @LastEditTime: 2020-09-05 19:13:46
  * @Description: 设置页
  */
 
@@ -57,7 +57,7 @@ class Setting {
    */
   getTheme() {
     return new Promise(resolve => {
-      readdir(dirname(__dirname), (err, files) => {
+      readdir(dirname(dirname(__dirname)), (err, files) => {
         if (err) throw err;
         resolve(files);
       });

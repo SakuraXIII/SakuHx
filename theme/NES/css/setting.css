@@ -57,7 +57,7 @@
   height: 25px;
 }
 
-#set_isextra input {
+.toggle input {
   position: absolute;
   width: 55px;
   height: 25px;
@@ -92,12 +92,12 @@
   transition: all 0.5s;
 }
 
-#set_isextra input:checked + .circle::before {
+.toggle input:checked + .circle::before {
   content: "YES";
   left: 55%;
 }
 
-#set_isextra input:checked + .circle {
+.toggle input:checked + .circle {
   border-color: transparent;
   background: linear-gradient(to right, #12c2e9, #c471ed);
 }

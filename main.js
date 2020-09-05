@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-07-26 09:23:18
- * @LastEditTime: 2020-09-02 21:04:04
+ * @LastEditTime: 2020-09-05 19:13:29
  * @Description: 入口主文件
  */
 const { app, BrowserWindow, Menu, ipcMain } = require("electron");
