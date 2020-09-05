@@ -1,11 +1,11 @@
 const { exec } = require("child_process");
-const { shell, remote } = require("electron");
-const { clipboard } = require("electron");
-const { Post } = require("./post");
-const { Setting } = require("./setting");
-const { Edit } = require("./edit");
+const { shell, remote, clipboard } = require("electron");
+//index.js被引入到index.html中,所以路径是以html为基准进行查找
+const { Post } = require("./js/post");
+const { Setting } = require("./js/setting");
+const { Edit } = require("./js/edit");
 class App {
-  active = 3;
+  active = 1;
   static global = remote.getGlobal("mySiteInfo");
   constructor() {
     this.init();

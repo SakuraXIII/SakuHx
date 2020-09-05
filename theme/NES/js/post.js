@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-29 23:20:46
- * @LastEditTime: 2020-09-02 19:18:41
+ * @LastEditTime: 2020-09-05 14:44:24
  * @Description: 文章列表页
  */
 const fs = require("fs");
@@ -97,4 +97,5 @@ class Post {
     // });
   }
 }
+
 exports.Post = Post;

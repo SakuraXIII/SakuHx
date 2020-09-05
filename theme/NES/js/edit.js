@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-09-02 19:35:12
+ * @LastEditTime: 2020-09-05 14:17:00
  * @Description: 编辑页
  */
 
@@ -61,6 +61,15 @@ class Edit {
    * 保存到文件
    */
   saveFile() {
+    let str = `
+    ---
+    title: ${document.querySelector("#title").innerText},
+    date: ${new Date().toLocaleDateString()},
+    
+    ---
+    `;
+    let content = document.querySelector("#edit_area").innerText;
+    console.log(content)
     App.showPopup("保存成功");
   }
 }
