@@ -83,7 +83,7 @@ class App {
    */
   syncSite() {
     exec("npm run start", { cwd: App.global.rootPath }, (error, stdout, stderr) => {
-      if (stderr) throw stderr;
+      if (error) throw(error);
       App.showPopup("同步站点成功");
       if (App.global.openGit) {
         shell.openExternal(App.global.gitRepo);
@@ -139,7 +139,7 @@ class App {
   static extraEditor(postName) {
     let cmd = App.global.extraEditor + " " + postName;
     exec(cmd, { cwd: App.global.postPath }, (error, stdout, stderr) => {
-      if (error | stderr) App.showPopup("外部编辑器打开失败--->" + error + stderr);
+      if (error) App.showPopup("外部编辑器打开失败--->" + error);
     });
   }
 }
