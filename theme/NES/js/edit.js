@@ -1,12 +1,13 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-09-05 15:40:19
+ * @LastEditTime: 2020-09-05 20:21:29
  * @Description: 编辑页
  */
 const { writeFile } = require("fs");
 const { title } = require("process");
 const { Post } = require("./post");
+const { ipcRenderer } = require("electron");
 class Edit {
   static instance = null;
   constructor() {
@@ -64,11 +65,12 @@ class Edit {
    */
   saveFile() {
     let title = document.querySelector("#title").innerText;
+    let tags = document.querySelector("#post_tags").value.split(",");
     // 这一段文章配置信息不能缩进格式化,否则前面会有制表符,导致配置不生效
     let str = `---
 title: ${title}
-date: ${new Date().toLocaleDateString()}
-tags: 
+date: ${new Date().toLocaleDateString()} ${new Date().toTimeString().split(" ")[0]}
+tags: ${tags}
 ---\n`;
     let content = document.querySelector("#edit_area").innerText;
     content.trim();
@@ -79,6 +81,7 @@ tags:
       App.showPopup("保存成功");
       let ul = document.querySelector(".post ul");
       Post.addPost(ul, title + ".md");
+      ipcRenderer.send("addTags", tags);
     });
   }
 }

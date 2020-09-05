@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-07-26 09:23:18
- * @LastEditTime: 2020-09-05 19:13:29
+ * @LastEditTime: 2020-09-05 20:21:08
  * @Description: 入口主文件
  */
 const { app, BrowserWindow, Menu, ipcMain } = require("electron");
@@ -46,6 +46,12 @@ app.whenReady().then(() => {
 app.on("window-all-closed", function () {
   if (process.platform !== "darwin") app.quit();
 });
+
+ipcMain.on("addTags", (event, args) => {
+  global.mySiteInfo.tags = args;
+  needSave = true
+});
+
 // 接收渲染进程发送的异步消息
 ipcMain.on("saveConfig", (event, args) => {
   global.mySiteInfo = args;

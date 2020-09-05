@@ -30,8 +30,24 @@
   float: right;
 }
 
+.tags-list {
+  text-align: right;
+  margin-right: 5%;
+}
+
+.tags-list input {
+  margin-top: 2em;
+  outline: none;
+}
+
+.tags-list::before {
+  content: "";
+  height: 80px;
+  display: block;
+}
+
 #edit_area {
-  margin: 10vw auto;
+  margin-top: 2%;
   background-color: #777;
   outline: none;
   overflow-x: hidden;
