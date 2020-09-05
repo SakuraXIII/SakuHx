@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-29 23:20:46
- * @LastEditTime: 2020-09-05 14:44:24
+ * @LastEditTime: 2020-09-05 15:37:20
  * @Description: 文章列表页
  */
 const fs = require("fs");
@@ -30,17 +30,7 @@ class Post {
     let ul = document.querySelector(".post ul");
     if (this.postList.length !== 0) {
       this.postList.map((value, index, arr) => {
-        ul.insertAdjacentHTML(
-          "beforeend",
-          `
-      <li class='post_item'>
-        <div class="nes-container is-rounded">
-          <span class='nes-pointer' id='postname'>${value.split(".")[0]}</span>
-          <i class='nes-pointer' id='delpost' style='font-style:normal;'>删除</i>
-        </div>
-      </li>
-    `
-        );
+        Post.addPost(ul, value);
       });
     } else {
       ul.insertAdjacentHTML(
@@ -72,6 +62,24 @@ class Post {
     });
   }
   /**
+   * 向文章列表插入新文章
+   * @param {Element} el 容纳子元素的父元素
+   * @param {String}} text 插入的文本
+   */
+  static addPost(el, text) {
+    el.insertAdjacentHTML(
+      "beforeend",
+      `
+  <li class='post_item'>
+    <div class="nes-container is-rounded">
+      <span class='nes-pointer' id='postname'>${text.split(".")[0]}</span>
+      <i class='nes-pointer' id='delpost' style='font-style:normal;'>删除</i>
+    </div>
+  </li>
+`
+    );
+  }
+  /**
    * 打开文章
    * @param {string} postName 文章名
    */
@@ -84,17 +92,18 @@ class Post {
   }
   /**
    * 删除文章
-   * @param {string} postName 文章名
+   * @param {string} postName 文章名 带后缀名
    */
   delPost(postName) {
     let ul = document.querySelector(".post ul");
     let index = this.postList.indexOf(postName);
-    this.postList.splice(index, 1);
-    ul.removeChild(ul.children[index]);
-    // fs.unlink(path, err => {
-    //   if (err) throw err;
-    App.showPopup("删除成功!!");
-    // });
+    let path = App.global.postPath + "/" + postName;
+    fs.unlink(path, err => {
+      if (err) throw err;
+      App.showPopup("删除成功!!");
+      ul.removeChild(ul.children[index]);
+      this.postList.splice(index, 1);
+    });
   }
 }
 

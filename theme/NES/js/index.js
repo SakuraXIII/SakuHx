@@ -5,7 +5,7 @@ const { Post } = require("./js/post");
 const { Setting } = require("./js/setting");
 const { Edit } = require("./js/edit");
 class App {
-  active = 1;
+  active = 3;
   static global = remote.getGlobal("mySiteInfo");
   constructor() {
     this.init();
@@ -45,6 +45,7 @@ class App {
    */
   showView() {
     document.querySelector(`[data-view="${this.active}"]`).classList.remove("none");
+    document.querySelector(".right").scrollTop = 0; //当某个选项卡中滚动了页面,切换到其他选项卡时,回到顶部
     switch (this.active.toString()) {
       case "2":
         Post.getInstance();

@@ -1,10 +1,12 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-09-05 14:17:00
+ * @LastEditTime: 2020-09-05 15:40:19
  * @Description: 编辑页
  */
-
+const { writeFile } = require("fs");
+const { title } = require("process");
+const { Post } = require("./post");
 class Edit {
   static instance = null;
   constructor() {
@@ -61,16 +63,23 @@ class Edit {
    * 保存到文件
    */
   saveFile() {
-    let str = `
-    ---
-    title: ${document.querySelector("#title").innerText},
-    date: ${new Date().toLocaleDateString()},
-    
-    ---
-    `;
+    let title = document.querySelector("#title").innerText;
+    // 这一段文章配置信息不能缩进格式化,否则前面会有制表符,导致配置不生效
+    let str = `---
+title: ${title}
+date: ${new Date().toLocaleDateString()}
+tags: 
+---\n`;
     let content = document.querySelector("#edit_area").innerText;
-    console.log(content)
-    App.showPopup("保存成功");
+    content.trim();
+    let post = str + content;
+    let file = `${App.global.postPath}/${title}.md`;
+    writeFile(file, post, { flag: "w" }, err => {
+      if (err) throw err;
+      App.showPopup("保存成功");
+      let ul = document.querySelector(".post ul");
+      Post.addPost(ul, title + ".md");
+    });
   }
 }
 
