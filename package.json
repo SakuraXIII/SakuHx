@@ -4,7 +4,8 @@
   "description": "A simple Electron blog edit application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "builder": "electron-builder"
   },
   "repository": "https://github.com/SakuraXIII/SakuHx.git",
   "keywords": [
@@ -14,6 +15,35 @@
   ],
   "author": "SakuraXIII",
   "devDependencies": {
-    "electron": "^9.1.1"
+    "electron": "^9.1.1",
+    "electron-builder": "^22.8.0"
+  },
+  "build": {
+    "productName":"SakuHx",
+    "appId": "com.sy.sakuhx",
+    "copyright":"Sakura",
+    "directories": {
+      "output": "build"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "./kiana.ico",
+      "uninstallerIcon": "./kiana.ico",
+      "installerHeaderIcon": "./kiana.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "SakuHx",
+      "include": "build/script/installer.nsh"
+    },
+    "win": {  
+      "icon": "./kiana.ico",
+      "target": [
+        {
+          "target": "nsis"
+        }
+      ]
+    }  
   }
 }
