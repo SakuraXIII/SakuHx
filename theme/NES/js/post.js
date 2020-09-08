@@ -1,16 +1,16 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-29 23:20:46
- * @LastEditTime: 2020-09-08 20:29:08
+ * @LastEditTime: 2020-09-08 23:33:14
  * @Description: 文章列表页
  */
 const { Edit } = require("./edit");
-const { readFile, readdirSync } = require("fs");
+const { readFile, readdirSync, unlink } = require("fs");
 class Post {
-  postList = [];
+  static postList = [];
   static instance = null;
   constructor() {
-    this.postList = this.postList.length == 0 ? readdirSync(App.global.postPath) : this.postList;
+    Post.postList = readdirSync(App.global.postPath);
     this.InsertPostList();
     this.addListener();
   }
@@ -29,8 +29,8 @@ class Post {
    */
   InsertPostList() {
     let ul = document.querySelector(".post ul");
-    if (this.postList.length !== 0) {
-      this.postList.map((value, index, arr) => {
+    if (Post.postList.length !== 0) {
+      Post.postList.map((value, index, arr) => {
         Post.addPost(ul, value);
       });
     } else {
@@ -101,13 +101,13 @@ class Post {
    */
   delPost(postName) {
     let ul = document.querySelector(".post ul");
-    let index = this.postList.indexOf(postName);
+    let index = Post.postList.indexOf(postName);
     let path = App.global.postPath + "/" + postName;
-    fs.unlink(path, err => {
+    unlink(path, err => {
       if (err) throw err;
       App.showPopup("删除成功!!");
       ul.removeChild(ul.children[index]);
-      this.postList.splice(index, 1);
+      Post.postList.splice(index, 1);
     });
   }
 }

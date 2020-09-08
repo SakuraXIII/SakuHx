@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-09-08 20:34:12
+ * @LastEditTime: 2020-09-08 23:32:49
  * @Description: 编辑页
  */
 const { writeFile } = require("fs");
@@ -26,8 +26,12 @@ class Edit {
     this.bindClick();
   }
   bindClick() {
-    document.querySelector("#create").addEventListener("click", this.createNewPost);
-    document.querySelector("#save").addEventListener("click", this.saveFile);
+    document.querySelector("#create").addEventListener("click", () => {
+      this.createNewPost();
+    });
+    document.querySelector("#save").addEventListener("click", () => {
+      this.saveFile();
+    });
   }
   /**
    * 创建节点观察对象,监视编辑区的变化
@@ -42,13 +46,7 @@ class Edit {
      * 观察节点变化的异步回调
      * @param {Array} mutationsList 节点变化记录列表
      */
-    var observer = new MutationObserver(mutationsList => {
-      if (targetNode.children.length == 0) {
-        //阻止退格键将p标签也给删除,导致内部完全为空
-        let node = document.createElement("div");
-        targetNode.appendChild(node);
-      }
-    });
+    var observer = new MutationObserver(mutationsList => {});
     // 开始观察已配置突变的目标节点
     observer.observe(targetNode, config);
   }
@@ -67,14 +65,18 @@ class Edit {
     let title = document.querySelector("#title").innerText;
     let content = document.querySelector("#edit_area").innerText;
     content.trim();
+    content == "请写下你的想法..." ? "" : content;
     let file = `${App.global.postPath}/${title}.md`;
     writeFile(file, content, { flag: "w" }, err => {
       if (err) throw err;
       App.showPopup("保存成功");
       let ul = document.querySelector(".post ul");
-      if (this.flag) {
-        Post.addPost(ul, title + ".md");
+      if (Post.postList.length !== 0 && this.flag) {
+        let text = title + ".md";
+        Post.addPost(ul, text);
+        Post.postList.push(text);
       }
+      this.flag = false;
     });
   }
   /**

@@ -54,7 +54,7 @@
   font-size: 13.6px;
   min-height: 0.8rem;
   background: rgb(247, 247, 247);
-  padding: 1rem;
+  padding: 2em;
   border-radius: 3px;
   color: rgb(119, 119, 119);
   width: 83%;
@@ -74,11 +74,8 @@
   background-color: pink;
 }
 
-#edit_area div {
-  text-indent: 2em;
-}
 
-#edit_area div:empty::before {
+#edit_area:empty::before {
   content: "请写下你的想法...";
   color: gray;
 }
