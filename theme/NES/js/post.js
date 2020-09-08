@@ -1,15 +1,16 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-29 23:20:46
- * @LastEditTime: 2020-09-05 15:37:20
+ * @LastEditTime: 2020-09-08 20:29:08
  * @Description: 文章列表页
  */
-const fs = require("fs");
+const { Edit } = require("./edit");
+const { readFile, readdirSync } = require("fs");
 class Post {
   postList = [];
   static instance = null;
   constructor() {
-    this.postList = this.postList.length == 0 ? fs.readdirSync(App.global.postPath) : this.postList;
+    this.postList = this.postList.length == 0 ? readdirSync(App.global.postPath) : this.postList;
     this.InsertPostList();
     this.addListener();
   }
@@ -81,13 +82,17 @@ class Post {
   }
   /**
    * 打开文章
-   * @param {string} postName 文章名
+   * @param {string} postName 文章名(带后缀名)
    */
   editPost(postName) {
     if (App.global.openExtra) {
       App.extraEditor(postName);
     } else {
-      window.open(App.global.postPath + "\\" + postName);
+      readFile(App.global.postPath + "/" + postName, { encoding: "utf8" }, (err, data) => {
+        if (err) throw err;
+        Edit.getInstance().writePost(data, postName);
+        document.getElementById("newIdea").click();
+      });
     }
   }
   /**

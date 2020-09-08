@@ -1,15 +1,13 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-09-05 20:21:29
+ * @LastEditTime: 2020-09-08 20:34:12
  * @Description: 编辑页
  */
 const { writeFile } = require("fs");
-const { title } = require("process");
-const { Post } = require("./post");
-const { ipcRenderer } = require("electron");
 class Edit {
   static instance = null;
+  flag = true;
   constructor() {
     this.init();
   }
@@ -28,7 +26,7 @@ class Edit {
     this.bindClick();
   }
   bindClick() {
-    document.querySelector("#draft").addEventListener("click", this.saveDraft);
+    document.querySelector("#create").addEventListener("click", this.createNewPost);
     document.querySelector("#save").addEventListener("click", this.saveFile);
   }
   /**
@@ -57,32 +55,38 @@ class Edit {
   /**
    * 保存到草稿
    */
-  saveDraft() {
-    App.showPopup("暂存成功");
+  createNewPost() {
+    document.querySelector("#title").innerText = "新的文章";
+    document.querySelector("#edit_area").innerText = "";
+    this.flag = true;
   }
   /**
    * 保存到文件
    */
   saveFile() {
     let title = document.querySelector("#title").innerText;
-    let tags = document.querySelector("#post_tags").value.split(",");
-    // 这一段文章配置信息不能缩进格式化,否则前面会有制表符,导致配置不生效
-    let str = `---
-title: ${title}
-date: ${new Date().toLocaleDateString()} ${new Date().toTimeString().split(" ")[0]}
-tags: ${tags}
----\n`;
     let content = document.querySelector("#edit_area").innerText;
     content.trim();
-    let post = str + content;
     let file = `${App.global.postPath}/${title}.md`;
-    writeFile(file, post, { flag: "w" }, err => {
+    writeFile(file, content, { flag: "w" }, err => {
       if (err) throw err;
       App.showPopup("保存成功");
       let ul = document.querySelector(".post ul");
-      Post.addPost(ul, title + ".md");
-      ipcRenderer.send("addTags", tags);
+      if (this.flag) {
+        Post.addPost(ul, title + ".md");
+      }
     });
+  }
+  /**
+   * 打开文章列表中选中的文章
+   * @param {String} content 填充编辑区的文本
+   * @param {String} title 文件名
+   */
+  writePost(content, title) {
+    let str = title.split(".")[0];
+    document.querySelector("#title").innerText = str;
+    document.querySelector("#edit_area").innerText = content;
+    this.flag = false;
   }
 }
 

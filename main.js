@@ -1,14 +1,13 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-07-26 09:23:18
- * @LastEditTime: 2020-09-08 19:05:44
+ * @LastEditTime: 2020-09-08 20:35:01
  * @Description: 入口主文件
  */
 const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const path = require("path");
-const { writeFile, readFileSync, writeFileSync } = require("fs");
+const { writeFile, readFileSync } = require("fs");
 let confpath = path.join(__dirname, "conf.json");
-writeFileSync("./log.txt",confpath)
 let config = readFileSync(confpath, "utf-8");
 global.mySiteInfo = JSON.parse(config);
 let mainWindow = null;
@@ -53,10 +52,12 @@ app.on("window-all-closed", function () {
   if (process.platform !== "darwin") app.quit();
 });
 
-ipcMain.on("addTags", (event, args) => {
-  global.mySiteInfo.tags = args;
-  needSave = true;
-});
+
+// 目前该功能舍弃
+// ipcMain.on("addTags", (event, args) => {
+//   global.mySiteInfo.tags = args;
+//   needSave = true;
+// });
 
 // 接收渲染进程发送的异步消息
 ipcMain.on("saveConfig", (event, args) => {
