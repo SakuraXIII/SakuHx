@@ -1,6 +1,6 @@
 {
   "name": "sakuhx-blog",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "A simple Electron blog edit application",
   "main": "main.js",
   "scripts": {
@@ -45,6 +45,8 @@
     },
     "win": {  
       "icon": "build/kiana.ico",
+      "artifactName": "${productName}_Setup_${version}.${ext}",
+
       "target": [
         {
           "target": "nsis"
