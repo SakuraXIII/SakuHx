@@ -1,14 +1,16 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-07-26 09:23:18
- * @LastEditTime: 2020-09-05 20:21:08
+ * @LastEditTime: 2020-09-08 19:05:44
  * @Description: 入口主文件
  */
 const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const path = require("path");
-const { config } = require("./appGlobal");
-const { writeFile } = require("fs");
-global.mySiteInfo = config;
+const { writeFile, readFileSync, writeFileSync } = require("fs");
+let confpath = path.join(__dirname, "conf.json");
+writeFileSync("./log.txt",confpath)
+let config = readFileSync(confpath, "utf-8");
+global.mySiteInfo = JSON.parse(config);
 let mainWindow = null;
 let needSave = false;
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true"; //关闭electron安全协议警告
@@ -29,12 +31,16 @@ function createWindow() {
     title: "SakuHx",
     backgroundColor: "#fff",
   });
-  mainWindow.loadFile(__dirname + "/theme/" + config.theme + "/index.html");
+  let themePath = path.join(__dirname, "theme", global.mySiteInfo.theme, "index.html");
+  mainWindow.loadFile(themePath);
   mainWindow.webContents.on("did-fail-load", error => {
-    console.error("加载主题失败，恢复默认主题");
-    mainWindow.loadFile("index.html");
+    writeFile(__dirname + "\\log.txt", "加载主题失败", { flag: "a" }, err => {});
   });
-  mainWindow.webContents.openDevTools();
+  mainWindow.webContents.on("crashed", (event, killed) => {
+    writeFile(__dirname + "\\log.txt", "崩溃了", { flag: "a" }, err => {});
+  });
+
+  // mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
@@ -49,7 +55,7 @@ app.on("window-all-closed", function () {
 
 ipcMain.on("addTags", (event, args) => {
   global.mySiteInfo.tags = args;
-  needSave = true
+  needSave = true;
 });
 
 // 接收渲染进程发送的异步消息
@@ -62,7 +68,7 @@ ipcMain.on("saveConfig", (event, args) => {
 // 关闭程序前保存更新的配置
 app.on("before-quit", () => {
   if (needSave) {
-    writeFile("./conf.json", JSON.stringify(global.mySiteInfo), err => {
+    writeFile(confpath, JSON.stringify(global.mySiteInfo), err => {
       if (err) throw err;
     });
   }

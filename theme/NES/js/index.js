@@ -5,7 +5,7 @@ const { Post } = require("./js/post");
 const { Setting } = require("./js/setting");
 const { Edit } = require("./js/edit");
 class App {
-  active = 3;
+  active = 1;
   static global = remote.getGlobal("mySiteInfo");
   constructor() {
     this.init();

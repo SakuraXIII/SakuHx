@@ -25,20 +25,26 @@
     "directories": {
       "output": "build"
     },
+    "asar":false, 
+    "files":[
+      "!.gitignore",
+      "!README.md",
+      "!package-lock.json",
+      "!.vscode"
+    ],
     "nsis": {
       "oneClick": false,
       "allowElevation": true,
       "allowToChangeInstallationDirectory": true,
-      "installerIcon": "./kiana.ico",
-      "uninstallerIcon": "./kiana.ico",
-      "installerHeaderIcon": "./kiana.ico",
+      "installerIcon": "build/kiana.ico",
+      "uninstallerIcon": "build/kiana.ico",
+      "installerHeaderIcon": "build/kiana.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "SakuHx",
-      "include": "build/script/installer.nsh"
+      "shortcutName": "SakuHx"
     },
     "win": {  
-      "icon": "./kiana.ico",
+      "icon": "build/kiana.ico",
       "target": [
         {
           "target": "nsis"
