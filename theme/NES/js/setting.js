@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-09-05 19:13:46
+ * @LastEditTime: 2020-09-09 15:35:14
  * @Description: 设置页
  */
 
@@ -36,6 +36,7 @@ class Setting {
     document.querySelector("#set_root_path input").value = App.global.rootPath;
     document.querySelector("#set_post_path input").value = App.global.postPath;
     document.querySelector("#set_editor_path input").value = App.global.extraEditor;
+    document.querySelector("#set_savetime input").value = App.global.saveTime;
     document.querySelector("#set_isextra input").checked = App.global.openExtra;
     let current_theme = App.global.theme;
     // 异步获取主题列表
@@ -94,6 +95,10 @@ class Setting {
       rootPath: document.querySelector("#set_root_path input").value,
       postPath: document.querySelector("#set_post_path input").value,
       extraEditor: document.querySelector("#set_editor_path input").value,
+      saveTime:
+        document.querySelector("#set_savetime input").value >= 1
+          ? document.querySelector("#set_savetime input").value
+          : 2,
       openGit: document.querySelector("#set_isgit input").checked,
       openExtra: document.querySelector("#set_isextra input").checked,
     };

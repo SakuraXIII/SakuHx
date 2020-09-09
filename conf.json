@@ -1,1 +1,13 @@
-{"theme":"NES","avator":"","name":"Sakura","gitRepo":"https://gitee.com/Tonyteachers/Tonyteachers","blog":"https://tonyteachers.gitee.io/","rootPath":"G:/Blog/Blog","postPath":"G:/Blog/Blog/source/_posts","extraEditor":"E:/Typora/Typora.exe","openGit":true,"openExtra":false}
+{
+  "theme": "NES",
+  "avator": "",
+  "name": "Sakura",
+  "gitRepo": "https://gitee.com/Tonyteachers/Tonyteachers",
+  "blog": "https://tonyteachers.gitee.io/",
+  "rootPath": "G:/Blog/Blog",
+  "postPath": "G:/Blog/Blog/source/_posts",
+  "extraEditor": "E:/Typora/Typora.exe",
+  "saveTime": "2",
+  "openGit": true,
+  "openExtra": false
+}

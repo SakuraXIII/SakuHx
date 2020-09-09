@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-09-09 14:56:51
+ * @LastEditTime: 2020-09-09 18:05:32
  * @Description: 编辑页
  */
 const { writeFile } = require("fs");
@@ -61,8 +61,9 @@ class Edit {
   }
   /**
    * 保存到文件
+   * @param {Boolean} tip 是否显示保存成功提示框
    */
-  saveFile() {
+  saveFile(tip = true) {
     let title = document.querySelector("#title").innerText;
     let content = document.querySelector("#edit_area").innerText;
     content.trim();
@@ -70,7 +71,7 @@ class Edit {
     let file = `${App.global.postPath}/${title}.md`;
     writeFile(file, content, { flag: "w" }, err => {
       if (err) throw err;
-      App.showPopup("保存成功");
+      tip ? App.showPopup("保存成功") : "";
       let ul = document.querySelector(".post ul");
       if (Post.postList.length !== 0 && this.flag) {
         let text = title + ".md";
@@ -90,14 +91,17 @@ class Edit {
     document.querySelector("#title").innerText = str;
     document.querySelector("#edit_area").innerText = content;
     this.flag = false;
+    //如果是打开过往的文章也自动开启保存
+    this.setTimeSave()
   }
   /**
    * 定时保存文章
    */
   setTimeSave() {
-    let minute = 1;
+    let minute = App.global.saveTime ? App.global.saveTime : 2;
+    minute = parseInt(minute);
     setInterval(() => {
-      this.saveFile();
+      this.saveFile(false);
     }, minute * 60 * 1000);
   }
 }
