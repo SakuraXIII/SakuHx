@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-09-08 23:32:49
+ * @LastEditTime: 2020-09-09 14:56:51
  * @Description: 编辑页
  */
 const { writeFile } = require("fs");
@@ -31,6 +31,7 @@ class Edit {
     });
     document.querySelector("#save").addEventListener("click", () => {
       this.saveFile();
+      this.setTimeSave(); //在出现一次保存后开始自动保存
     });
   }
   /**
@@ -89,6 +90,15 @@ class Edit {
     document.querySelector("#title").innerText = str;
     document.querySelector("#edit_area").innerText = content;
     this.flag = false;
+  }
+  /**
+   * 定时保存文章
+   */
+  setTimeSave() {
+    let minute = 1;
+    setInterval(() => {
+      this.saveFile();
+    }, minute * 60 * 1000);
   }
 }
 

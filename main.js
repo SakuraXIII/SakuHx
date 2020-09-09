@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-07-26 09:23:18
- * @LastEditTime: 2020-09-08 22:16:38
+ * @LastEditTime: 2020-09-09 09:10:21
  * @Description: 入口主文件
  */
 const { app, BrowserWindow, Menu, ipcMain } = require("electron");
@@ -39,7 +39,7 @@ function createWindow() {
     writeFile(__dirname + "\\log.txt", "崩溃了", { flag: "a" }, err => {});
   });
 
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
