@@ -82,8 +82,11 @@ class App {
    * 同步站点
    */
   syncSite() {
+    App.showPopup("开始同步");
     exec("npm run start", { cwd: App.global.rootPath }, (error, stdout, stderr) => {
-      if (error) throw(error);
+      if (error) {
+        App.showPopup("同步失败");
+      }
       App.showPopup("同步站点成功");
       if (App.global.openGit) {
         shell.openExternal(App.global.gitRepo);
