@@ -61,6 +61,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  cursor: text;
 }
 
 #edit_area::after {
@@ -69,6 +70,7 @@
   display: block;
 }
 
+#edit_area::selection,
 #edit_area *::selection {
   color: white;
   background-color: pink;

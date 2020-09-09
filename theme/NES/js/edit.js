@@ -1,7 +1,7 @@
 /*
  * @Author: Sakura Sun
  * @Date: 2020-08-30 14:45:45
- * @LastEditTime: 2020-09-09 18:05:32
+ * @LastEditTime: 2020-09-09 19:52:06
  * @Description: 编辑页
  */
 const { writeFile } = require("fs");
@@ -33,6 +33,21 @@ class Edit {
       this.saveFile();
       this.setTimeSave(); //在出现一次保存后开始自动保存
     });
+    //添加快捷键绑定
+    document.querySelector("#edit_area").addEventListener(
+      "keydown",
+      e => {
+        //按下组合键的时候,ctrlKey = true
+        if (e.ctrlKey && e.key == "s") {
+          this.saveFile(false);
+        }
+        if (e.ctrlKey && e.key == "n") {
+          this.saveFile(false);
+          this.createNewPost();
+        }
+      },
+      true
+    );
   }
   /**
    * 创建节点观察对象,监视编辑区的变化
@@ -47,7 +62,9 @@ class Edit {
      * 观察节点变化的异步回调
      * @param {Array} mutationsList 节点变化记录列表
      */
-    var observer = new MutationObserver(mutationsList => {});
+    var observer = new MutationObserver(mutationsList => {
+      // console.log(mutationsList)
+    });
     // 开始观察已配置突变的目标节点
     observer.observe(targetNode, config);
   }
@@ -92,7 +109,7 @@ class Edit {
     document.querySelector("#edit_area").innerText = content;
     this.flag = false;
     //如果是打开过往的文章也自动开启保存
-    this.setTimeSave()
+    this.setTimeSave();
   }
   /**
    * 定时保存文章
